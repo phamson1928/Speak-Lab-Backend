@@ -6,7 +6,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomParticipantController;
-use App\Http\Controllers\MessageController;
 
 
 // Google OAuth routes moved to routes/web.php to use web middleware
@@ -24,5 +23,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('rooms', RoomController::class);
     Route::apiResource('room-participants', RoomParticipantController::class);
-    Route::apiResource('messages', MessageController::class);
+    
 });

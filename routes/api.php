@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomParticipantController;
+use App\Http\Controllers\MessageController;
 
 
 // Google OAuth routes moved to routes/web.php to use web middleware
@@ -18,4 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{id}', [UserController::class, 'update']);
         Route::delete('/{id}', [UserController::class, 'destroy']);
     });
+
+    Route::apiResource('rooms', RoomController::class);
+    Route::apiResource('room-participants', RoomParticipantController::class);
+    Route::apiResource('messages', MessageController::class);
 });

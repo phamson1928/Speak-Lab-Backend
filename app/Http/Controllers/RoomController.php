@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $rooms = Room::with('host')->withCount('participants')->paginate(15);
         return response()->json($rooms);

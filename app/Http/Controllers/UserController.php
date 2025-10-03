@@ -9,9 +9,6 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the users.
-     */
     public function index(): JsonResponse
     {
         $users = User::all();
@@ -23,59 +20,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created user in storage.
-     */
-    public function store(Request $request): JsonResponse
-    {
-        try {
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:8',
-            ]);
-
-            $user = User::create($validated);
-
-            return response()->json([
-                'success' => true,
-                'data' => $user,
-                'message' => 'User created successfully'
-            ], 201);
-
-        } catch (ValidationException $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validation failed',
-                'errors' => $e->errors()
-            ], 422);
-        }
-    }
-
-    /**
-     * Display the specified user.
-     */
-    public function show(string $id): JsonResponse
-    {
-        $user = User::find($id);
-
-        if (!$user) {
-            return response()->json([
-                'success' => false,
-                'message' => 'User not found'
-            ], 404);
-        }
-
-        return response()->json([
-            'success' => true,
-            'data' => $user,
-            'message' => 'User retrieved successfully'
-        ]);
-    }
-
-    /**
-     * Update the specified user in storage.
-     */
     public function update(Request $request, string $id): JsonResponse
     {
         $user = User::find($id);
@@ -111,9 +55,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Remove the specified user from storage.
-     */
     public function destroy(string $id): JsonResponse
     {
         $user = User::find($id);

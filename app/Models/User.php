@@ -38,8 +38,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'google_id',
-        'avatar',
-        'level',
+
         'role',
     ];
 
